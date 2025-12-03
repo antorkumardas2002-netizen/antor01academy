@@ -1,0 +1,153 @@
+/* General Reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  text-align: center;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #ff4e50, #f9d423);
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+header .logo img {
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: yellow;
+}
+
+.menu-btn {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Section */
+.section {
+  background: rgba(0,0,0,0.6);
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 1000px;
+}
+
+.section h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.section p {
+  margin-bottom: 20px;
+}
+
+/* Event Cards */
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.event-card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.event-card h2 {
+  margin-top: 0;
+  color: #facc15;
+}
+
+.event-card p {
+  color: #e2e8f0;
+}
+
+.event-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.event-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.countdown {
+  font-weight: bold;
+  color: #22d3ee;
+  margin-top: 10px;
+}
+
+/* Footer */
+footer {
+  background: #111;
+  padding: 15px;
+  margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: #333;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+}
