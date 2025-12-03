@@ -1,34 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Teacher Portal - Upload Marks</title>
-  <link rel="stylesheet" href="teacher.css">
+  <link rel="stylesheet" href="teacher.css" />
   <style>
+    /* small inline styles for top buttons kept from original */
     .top-buttons {
       position: absolute;
       top: 20px;
       right: 20px;
     }
     .top-buttons button {
-      padding: 8px 14px;
-      margin-left: 10px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
+      padding: 8px 14px; margin-left: 10px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;
     }
-    .back-btn {
-      background: #004aad;
-      color: #fff;
-    }
-    .exit-btn {
-      background: #d9534f;
-      color: #fff;
-    }
-    .back-btn:hover { background:#00357a; }
-    .exit-btn:hover { background:#b52b27; }
+    .back-btn { background: #004aad; color: #fff; }
+    .exit-btn { background: #d9534f; color: #fff; }
+    .back-btn:hover { background:#00357a; } .exit-btn:hover { background:#b52b27; }
+    table td, table th { padding:8px; }
+    .small-note { font-size:13px; color:#666; margin-top:8px; }
   </style>
 </head>
 <body>
@@ -36,7 +27,6 @@
     <h1>ANTOR01ACADEMY</h1>
     <h2>Teacher Portal - Upload Marks</h2>
 
-    <!-- ✅ Back + Exit buttons always visible at top -->
     <div class="top-buttons">
       <button class="back-btn" onclick="goBack()">⬅ Home</button>
       <button class="exit-btn" onclick="logout()">⛔ Exit</button>
@@ -45,26 +35,30 @@
 
   <main>
     <section class="upload-box">
-      <h3>Enter or Edit Student Result</h3>
+      <h3>Enter or Edit Student Result (includes Reg. No.)</h3>
+
       <form id="uploadForm">
         <input type="text" id="roll" placeholder="Roll Number" required>
+        <input type="text" id="reg" placeholder="Registration Number (Reg No.)" required>
         <input type="text" id="name" placeholder="Student Name" required>
         <input type="text" id="class" placeholder="Class" required>
         <input type="text" id="marks" placeholder="Total Marks (e.g. 450/500)" required>
         <input type="text" id="grade" placeholder="Grade (e.g. A+)" required>
         <button type="submit">Save Result</button>
       </form>
-      <p id="msg"></p>
+
+      <p id="msg" class="small-note"></p>
+      <p class="small-note">Tip: Records are saved in your browser (localStorage) under the key <code>students</code>. Student portal reads the same key to show results to students.</p>
     </section>
   </main>
 
-  <!-- Table of all results -->
-  <section class="upload-box" style="margin:40px auto;">
+  <section class="upload-box" style="margin:40px auto; max-width:1100px;">
     <h3>All Saved Results</h3>
     <table id="resultsTable" border="1" style="width:100%; border-collapse:collapse; text-align:left;">
       <thead>
         <tr>
           <th>Roll</th>
+          <th>Reg. No.</th>
           <th>Name</th>
           <th>Class</th>
           <th>Total</th>
@@ -77,15 +71,12 @@
   </section>
 
   <footer>
-    <p>&copy; 2025 Aryan S S School</p>
+    <p>&copy; 2025 ANTOR01ACADEMY</p>
   </footer>
 
   <script src="teacher.js"></script>
   <script>
-    function goBack(){
-      window.location.href = "result_index.html";
-    }
+    function goBack(){ window.location.href = "result_index.html"; }
   </script>
 </body>
 </html>
-
