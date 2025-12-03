@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Portal — Login & Dashboard</title>
+  <style>
+    :root{--blue:#004aad;--muted:#6b7280}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,Arial}
+    body{background:#f4f7fb;color:#111;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{width:980px;max-width:100%;background:#fff;border-radius:12px;box-shadow:0 8px 28px rgba(16,24,40,0.08);overflow:hidden;display:grid;grid-template-columns:360px 1fr}
+    /* left (login) */
+    .left{background:linear-gradient(180deg,var(--blue),#00357a);color:#fff;padding:28px}
+    .logo{font-weight:700;margin-bottom:18px}
+    h1{font-size:20px;margin-bottom:12px}
+    p.lead{color:rgba(255,255,255,0.9);margin-bottom:18px}
+    label{display:block;font-size:13px;margin-top:10px;color:rgba(255,255,255,0.9)}
+    input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);margin-top:6px;background:rgba(255,255,255,0.04);color:#fff}
+    button.btn{width:100%;padding:10px;margin-top:14px;border-radius:8px;border:none;background:#ffd700;color:#000;font-weight:600;cursor:pointer}
+    small{display:block;margin-top:10px;color:rgba(255,255,255,0.8)}
+    /* right (dashboard) */
+    .right{padding:22px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .muted{color:var(--muted)}
+    .profile{display:flex;gap:12px;align-items:center}
+    .avatar{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#e2eeff,#cfe8ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--blue)}
+    .card-body{padding:6px 0}
+    .info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+    .info{background:#f8fafc;padding:12px;border-radius:8px}
+    .actions{margin-top:16px;display:flex;gap:10px}
+    .actions button{padding:8px 12px;border-radius:8px;border:1px solid #e5e7eb;background:#fff;cursor:pointer}
+    .hidden{display:none}
+    footer.small{font-size:13px;color:var(--muted);margin-top:14px}
+    /* responsive */
+    @media(max-width:880px){.card{grid-template-columns:1fr}.left{order:2}.right{order:1}}
+  </style>
+</head>
+<body>
+  <div class="card" role="application">
+    <aside class="left">
+      <div class="logo">ANTOR 01 ACADEMY</div>
+      <h1>Student Login</h1>
+      <p class="lead">Sign in with your Roll number and Registration number to view your details and result.</p>
+
+      <form id="loginForm" autocomplete="off">
+        <label for="roll">Roll Number</label>
+        <input id="roll" name="roll" placeholder="e.g. 101" required />
+
+        <label for="reg">Registration Number</label>
+        <input id="reg" name="reg" placeholder="e.g. REG2025" required />
+
+        <button class="btn" type="submit">Login & View Details</button>
+
+        <small>Don't have results yet? Ask your teacher to upload marks using the Teacher Portal.</small>
+      </form>
+
+      <p style="margin-top:20px;color:rgba(255,255,255,0.85);font-size:13px">Quick checks:
+        <ul style="margin-top:8px;color:rgba(255,255,255,0.9);list-style:disc;margin-left:18px">
+          <li>Teacher portal stores results in <code>localStorage</code> under the key <code>students</code>.</li>
+          <li>Student login uses <strong>roll</strong> + <strong>registration number</strong> for verification.</li>
+        </ul>
+      </p>
+    </aside>
+
+    <main class="right">
+      <div class="topbar">
+        <div class="profile">
+          <div class="avatar" id="avatar">S</div>
+          <div>
+            <div id="displayName">Welcome, visitor</div>
+            <div class="muted">Student Portal</div>
+          </div>
+        </div>
+        <div>
+          <button id="btnLogout" class="hidden">Logout</button>
+        </div>
+      </div>
+
+      <section id="welcomeBox" class="card-body">
+        <h2 id="title">Please login to see your details</h2>
+        <p class="muted">After successful login your personal details, total marks and grade will appear here. You can also download your record as a JSON file.</p>
+      </section>
+
+      <section id="dashboard" class="card-body hidden">
+        <h2 id="stdName">Student name</h2>
+        <div class="info-grid">
+          <div class="info"><strong>Roll</strong><div id="dRoll">—</div></div>
+          <div class="info"><strong>Registration No</strong><div id="dReg">—</div></div>
+          <div class="info"><strong>Class</strong><div id="dClass">—</div></div>
+          <div class="info"><strong>Total Marks</strong><div id="dTotal">—</div></div>
+          <div class="info"><strong>Grade</strong><div id="dGrade">—</div></div>
+          <div class="info"><strong>Source</strong><div id="dSource">Local (browser)</div></div>
+        </div>
+
+        <div class="actions">
+          <button id="downloadBtn">Download JSON</button>
+          <button id="printBtn">Print</button>
+        </div>
+
+        <footer class="small">Tip: Results are stored locally in your browser by the teacher portal. Clearing browser storage will remove them.</footer>
+      </section>
+
+      <section id="notFound" class="hidden" style="margin-top:14px">
+        <h3 style="color:#b91c1c">No result found</h3>
+        <p class="muted">We couldn't find a matching record for the details you provided. Make sure your Roll and Registration number are correct or contact your teacher.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Student portal JS — uses the same 'students' localStorage key that the teacher pages write to.
+    const loginForm = document.getElementById('loginForm');
+    const dashboard = document.getElementById('dashboard');
+    const welcomeBox = document.getElementById('welcomeBox');
+    const notFound = document.getElementById('notFound');
+    const btnLogout = document.getElementById('btnLogout');
+    const avatar = document.getElementById('avatar');
+
+    function showDashboard(student, roll) {
+      document.getElementById('stdName').textContent = student.name || '—';
+      document.getElementById('dRoll').textContent = roll;
+      document.getElementById('dReg').textContent = student.reg || '—';
+      document.getElementById('dClass').textContent = student.class || '—';
+      document.getElementById('dTotal').textContent = student.total || '—';
+      document.getElementById('dGrade').textContent = student.grade || '—';
+      document.getElementById('dSource').textContent = 'Local (browser)';
+      avatar.textContent = (student.name || 'S').trim().charAt(0).toUpperCase();
+
+      welcomeBox.classList.add('hidden');
+      notFound.classList.add('hidden');
+      dashboard.classList.remove('hidden');
+      btnLogout.classList.remove('hidden');
+
+      // Persist a simple logged-in marker for this session
+      sessionStorage.setItem('studentLogged', JSON.stringify({roll, reg: student.reg}));
+    }
+
+    function showNotFound() {
+      dashboard.classList.add('hidden');
+      welcomeBox.classList.add('hidden');
+      notFound.classList.remove('hidden');
+    }
+
+    function clearLogin() {
+      sessionStorage.removeItem('studentLogged');
+      dashboard.classList.add('hidden');
+      notFound.classList.add('hidden');
+      welcomeBox.classList.remove('hidden');
+      btnLogout.classList.add('hidden');
+      avatar.textContent = 'S';
+    }
+
+    loginForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const roll = document.getElementById('roll').value.trim();
+      const reg = document.getElementById('reg').value.trim();
+      const students = JSON.parse(localStorage.getItem('students')) || {};
+
+      if(!roll){ alert('Please enter Roll'); return; }
+
+      if(!students[roll]){
+        showNotFound();
+        return;
+      }
+
+      const s = students[roll];
+      // teachers in these files store minimal data; some records may not have reg.
+      if(s.reg && s.reg !== reg){
+        alert('Registration number does not match the Roll number.');
+        showNotFound();
+        return;
+      }
+
+      // success
+      showDashboard(Object.assign({reg: reg}, s), roll);
+    });
+
+    // download and print
+    document.getElementById('downloadBtn').addEventListener('click', function(){
+      const sess = JSON.parse(sessionStorage.getItem('studentLogged'));
+      if(!sess){ alert('Please login first'); return; }
+      const students = JSON.parse(localStorage.getItem('students')) || {};
+      const data = students[sess.roll] || {};
+      const blob = new Blob([JSON.stringify({roll: sess.roll, ...data}, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = (data.name || 'student') + '-' + sess.roll + '.json';
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('printBtn').addEventListener('click', function(){
+      const sess = JSON.parse(sessionStorage.getItem('studentLogged'));
+      if(!sess){ alert('Please login first'); return; }
+      window.print();
+    });
+
+    btnLogout.addEventListener('click', function(){ clearLogin(); });
+
+    // If a student is already logged this session, restore view
+    (function restoreSession(){
+      const sess = JSON.parse(sessionStorage.getItem('studentLogged'));
+      if(!sess) return;
+      const students = JSON.parse(localStorage.getItem('students')) || {};
+      if(students[sess.roll]) showDashboard(Object.assign({reg: sess.reg}, students[sess.roll]), sess.roll);
+      else clearLogin();
+    })();
+  </script>
+</body>
+</html>
