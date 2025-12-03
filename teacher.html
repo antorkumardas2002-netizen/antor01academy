@@ -4,79 +4,223 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Teacher Portal - Upload Marks</title>
-  <link rel="stylesheet" href="teacher.css" />
   <style>
-    /* small inline styles for top buttons kept from original */
-    .top-buttons {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-    .top-buttons button {
-      padding: 8px 14px; margin-left: 10px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;
-    }
-    .back-btn { background: #004aad; color: #fff; }
-    .exit-btn { background: #d9534f; color: #fff; }
-    .back-btn:hover { background:#00357a; } .exit-btn:hover { background:#b52b27; }
-    table td, table th { padding:8px; }
-    .small-note { font-size:13px; color:#666; margin-top:8px; }
+    body{font-family:Inter,system-ui,Arial;background:#f4f7fb;margin:0;padding:28px}
+    header{max-width:1100px;margin:0 auto 18px}
+    h1{margin:0 0 6px}
+    h2{margin:0 0 12px;font-weight:600;color:#374151}
+    .card{max-width:1100px;margin:0 auto;background:#fff;padding:18px;border-radius:10px;box-shadow:0 8px 20px rgba(16,24,40,0.06)}
+    .upload-box input{width:calc(33% - 12px);padding:10px;margin:6px;border-radius:8px;border:1px solid #e6eef8}
+    .upload-box button{display:inline-block;padding:10px 14px;margin:6px;border-radius:8px;border:0;background:#004aad;color:#fff;cursor:pointer}
+    table{width:100%;border-collapse:collapse;margin-top:14px}
+    table th, table td{padding:10px;border:1px solid #eef2ff;text-align:left}
+    .small-note{font-size:13px;color:#666;margin-top:8px}
+    .auth-section{margin-top:18px;padding:12px;border:1px dashed #e6eef8;border-radius:8px;background:#fbfdff}
+    label{display:block;margin-top:8px;font-size:14px;color:#374151}
+    .grid{display:flex;flex-wrap:wrap;gap:8px}
+    .grid input{flex:1}
+    .btn-secondary{background:#fff;border:1px solid #d1d5db;color:#111;padding:8px 10px;border-radius:8px;cursor:pointer}
   </style>
 </head>
 <body>
   <header>
-    <h1>ANTOR01ACADEMY</h1>
-    <h2>Teacher Portal - Upload Marks</h2>
-
-    <div class="top-buttons">
-      <button class="back-btn" onclick="goBack()">⬅ Home</button>
-      <button class="exit-btn" onclick="logout()">⛔ Exit</button>
-    </div>
+    <h1>Ramanuj Gupta Junior College</h1>
+    <h2>Teacher Portal — Upload Marks</h2>
   </header>
 
-  <main>
-    <section class="upload-box">
-      <h3>Enter or Edit Student Result (includes Reg. No.)</h3>
+  <div class="card">
+    <!-- Access check -->
+    <script>
+      if (localStorage.getItem("teacherLoggedIn") !== "true") {
+        alert("⚠ Access Denied! Please login first.");
+        window.location.href = "teacher-login.html";
+      }
+    </script>
 
-      <form id="uploadForm">
-        <input type="text" id="roll" placeholder="Roll Number" required>
-        <input type="text" id="reg" placeholder="Registration Number (Reg No.)" required>
-        <input type="text" id="name" placeholder="Student Name" required>
-        <input type="text" id="class" placeholder="Class" required>
-        <input type="text" id="marks" placeholder="Total Marks (e.g. 450/500)" required>
-        <input type="text" id="grade" placeholder="Grade (e.g. A+)" required>
-        <button type="submit">Save Result</button>
+    <section class="upload-box" aria-labelledby="uploadTitle">
+      <h3 id="uploadTitle">Enter or Edit Student Result (includes Reg. No.)</h3>
+
+      <form id="uploadForm" onsubmit="return false;">
+        <input type="text" id="roll" placeholder="Roll Number (required)" required>
+        <input type="text" id="reg" placeholder="Registration Number (Reg No.) (required)" required>
+        <input type="text" id="name" placeholder="Student Name (required)" required>
+        <input type="text" id="class" placeholder="Class (required)" required>
+        <input type="text" id="marks" placeholder="Total Marks (e.g. 450/500) (required)" required>
+        <input type="text" id="grade" placeholder="Grade (e.g. A+) (required)" required>
+        <div style="margin-top:8px">
+          <button id="saveBtn" type="button">Save Result</button>
+          <button id="logoutBtn" type="button" class="btn-secondary">Logout</button>
+        </div>
       </form>
 
       <p id="msg" class="small-note"></p>
       <p class="small-note">Tip: Records are saved in your browser (localStorage) under the key <code>students</code>. Student portal reads the same key to show results to students.</p>
     </section>
-  </main>
 
-  <section class="upload-box" style="margin:40px auto; max-width:1100px;">
-    <h3>All Saved Results</h3>
-    <table id="resultsTable" border="1" style="width:100%; border-collapse:collapse; text-align:left;">
-      <thead>
-        <tr>
-          <th>Roll</th>
-          <th>Reg. No.</th>
-          <th>Name</th>
-          <th>Class</th>
-          <th>Total</th>
-          <th>Grade</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </section>
+    <section style="margin-top:24px">
+      <h3>All Saved Results</h3>
+      <table id="resultsTable" aria-label="Saved results table">
+        <thead>
+          <tr>
+            <th>Roll</th>
+            <th>Reg. No.</th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Total</th>
+            <th>Grade</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 ANTOR01ACADEMY</p>
-  </footer>
+    <!-- Change Password / Recovery UI -->
+    <section class="auth-section" aria-labelledby="authTitle">
+      <h3 id="authTitle">Account — Change Password / Recovery Code</h3>
 
-  <script src="teacher.js"></script>
+      <label for="curPwd">Current password</label>
+      <input id="curPwd" type="password" placeholder="Current password"/>
+
+      <label for="newPwd">New password (leave blank if not changing)</label>
+      <input id="newPwd" type="password" placeholder="New password (min 6 chars)"/>
+
+      <label for="newRec">New recovery code (leave empty to remove recovery)</label>
+      <input id="newRec" type="text" placeholder="Recovery code (optional)"/>
+
+      <div style="margin-top:10px">
+        <button id="btnApplyAuth" type="button">Apply Changes</button>
+        <button id="btnShowReset" type="button" class="btn-secondary">Clear Credentials (Reset)</button>
+      </div>
+      <div id="authMsg" class="small-note"></div>
+      <div class="small-note" style="margin-top:6px">The recovery code (optional) can be used later on the login page to reset password if forgotten.</div>
+    </section>
+
+    <footer style="margin-top:18px;text-align:center;color:#6b7280">
+      &copy; 2025 Aryan S S School
+    </footer>
+  </div>
+
+  <!-- Load auth + login helper script -->
+  <script src="teacher-login.js"></script>
+
   <script>
-    function goBack(){ window.location.href = "result_index.html"; }
+    // Teacher portal JS (uses students key in localStorage)
+    const uploadForm = document.getElementById("uploadForm");
+    const msg = document.getElementById("msg");
+    const tableBody = document.querySelector("#resultsTable tbody");
+
+    document.getElementById('saveBtn').addEventListener('click', function(e){
+      const roll = document.getElementById("roll").value.trim();
+      const reg  = document.getElementById("reg").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const studentClass = document.getElementById("class").value.trim();
+      const marks = document.getElementById("marks").value.trim();
+      const grade = document.getElementById("grade").value.trim();
+
+      if (!roll || !reg || !name || !studentClass || !marks || !grade) {
+        msg.textContent = "⚠ Please fill all fields.";
+        msg.style.color = "red";
+        return;
+      }
+
+      let students = JSON.parse(localStorage.getItem("students")) || {};
+      students[roll] = { name, reg, class: studentClass, total: marks, grade };
+      localStorage.setItem("students", JSON.stringify(students));
+
+      msg.textContent = "✅ Result Saved Successfully!";
+      msg.style.color = "green";
+      uploadForm.reset();
+      loadResults();
+    });
+
+    function loadResults() {
+      tableBody.innerHTML = "";
+      const students = JSON.parse(localStorage.getItem("students")) || {};
+      const rolls = Object.keys(students).sort((a,b) => {
+        const na = Number(a), nb = Number(b);
+        if (!isNaN(na) && !isNaN(nb)) return na - nb;
+        return a.localeCompare(b);
+      });
+      for (let roll of rolls) {
+        const s = students[roll];
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${roll}</td>
+          <td>${s.reg || ''}</td>
+          <td>${s.name}</td>
+          <td>${s.class}</td>
+          <td>${s.total}</td>
+          <td>${s.grade}</td>
+          <td>
+            <button onclick="editResult('${roll}')">Edit</button>
+            <button onclick="deleteResult('${roll}')">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      }
+    }
+
+    function editResult(roll) {
+      const students = JSON.parse(localStorage.getItem("students")) || {};
+      const s = students[roll];
+      if (!s) return alert("Record not found.");
+      document.getElementById("roll").value = roll;
+      document.getElementById("reg").value = s.reg || "";
+      document.getElementById("name").value = s.name;
+      document.getElementById("class").value = s.class;
+      document.getElementById("marks").value = s.total;
+      document.getElementById("grade").value = s.grade;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteResult(roll) {
+      if (!confirm("Delete result for roll " + roll + " ? This cannot be undone.")) return;
+      const students = JSON.parse(localStorage.getItem("students")) || {};
+      delete students[roll];
+      localStorage.setItem("students", JSON.stringify(students));
+      loadResults();
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', function(){
+      if (window.teacherAuth && window.teacherAuth.logout) window.teacherAuth.logout();
+      window.location.href = 'teacher-login.html';
+    });
+
+    // Change password / recovery code actions (uses helpers from teacher-login.js)
+    document.getElementById('btnApplyAuth').addEventListener('click', async () => {
+      const cur = document.getElementById('curPwd').value;
+      const nw = document.getElementById('newPwd').value;
+      const rec = document.getElementById('newRec').value;
+      const authMsg = document.getElementById('authMsg');
+      authMsg.textContent = '';
+      try {
+        if (!window.teacherAuth || !window.teacherAuth.changePassword) throw new Error('Auth helpers not loaded.');
+        // If new password is empty and recovery is provided, we still need to verify current password before setting recovery.
+        await window.teacherAuth.changePassword(cur, nw ? nw : null, (typeof rec === 'string' ? rec : undefined));
+        authMsg.style.color = 'green';
+        authMsg.textContent = 'Saved successfully. Use the new password next login (if changed).';
+        document.getElementById('curPwd').value = '';
+        document.getElementById('newPwd').value = '';
+        document.getElementById('newRec').value = '';
+      } catch (err) {
+        authMsg.style.color = 'red';
+        authMsg.textContent = 'Error: ' + err.message;
+      }
+    });
+
+    // Clear stored credentials (dangerous: for reset)
+    document.getElementById('btnShowReset').addEventListener('click', () => {
+      if (!confirm('This will remove the stored teacher password and recovery code from this browser so you can set a new one. Continue?')) return;
+      localStorage.removeItem('teacherPasswordHash');
+      localStorage.removeItem('teacherRecoveryHash');
+      localStorage.removeItem('teacherLoggedIn');
+      alert('Credentials cleared. Redirecting to login to create a new password.');
+      window.location.href = 'teacher-login.html';
+    });
+
+    // initial population
+    loadResults();
   </script>
 </body>
 </html>
