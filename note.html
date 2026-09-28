@@ -1,1 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Computer Science Study Portal</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    color:#1e293b;
+}
+
+/* HEADER */
+
+header{
+    background:linear-gradient(135deg,#0f172a,#2563eb);
+    color:white;
+    text-align:center;
+    padding:35px 15px;
+}
+
+header h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+header p{
+    font-size:16px;
+    opacity:.9;
+}
+
+/* CONTAINER */
+
+.container{
+    width:95%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+/* SEARCH */
+
+.search-box{
+    margin-bottom:25px;
+}
+
+.search-box input{
+    width:100%;
+    padding:15px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:#2563eb;
+}
+
+/* SEMESTER */
+
+.semester{
+    background:white;
+    margin-bottom:20px;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.semester-title{
+    background:#2563eb;
+    color:white;
+    padding:18px 20px;
+    font-size:21px;
+    font-weight:bold;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.semester-title:hover{
+    background:#1d4ed8;
+}
+
+.arrow{
+    transition:.3s;
+}
+
+.semester.open .arrow{
+    transform:rotate(180deg);
+}
+
+.subject-container{
+    display:none;
+    padding:15px;
+}
+
+.semester.open .subject-container{
+    display:block;
+}
+
+/* SUBJECT */
+
+.subject{
+    border:1px solid #e2e8f0;
+    border-radius:8px;
+    margin-bottom:10px;
+    overflow:hidden;
+}
+
+.subject-title{
+    padding:14px;
+    background:#f8fafc;
+    color:#1e40af;
+    font-weight:bold;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.subject-title:hover{
+    background:#e0ecff;
+}
+
+.subject.open .subject-title{
+    background:#dbeafe;
+}
+
+.subject-arrow{
+    transition:.3s;
+}
+
+.subject.open .subject-arrow{
+    transform:rotate(180deg);
+}
+
+/* UNITS */
+
+.units{
+    display:none;
+    padding:10px;
+    background:white;
+}
+
+.subject.open .units{
+    display:block;
+}
+
+.unit{
+    margin:7px 0;
+}
+
+.unit a{
+    display:block;
+    padding:12px 15px;
+    background:#f1f5f9;
+    border-left:4px solid #2563eb;
+    border-radius:5px;
+    text-decoration:none;
+    color:#334155;
+    transition:.2s;
+}
+
+.unit a:hover{
+    background:#dbeafe;
+    color:#1d4ed8;
+    transform:translateX(4px);
+}
+
+.unit-number{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:40px;
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:24px;
+    }
+
+    .semester-title{
+        font-size:18px;
+    }
+
+    .subject-title{
+        font-size:14px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>📚 Computer Science Study Portal</h1>
+
+<p>Semester 1 to Semester 6 • Subjects • Units • Notes</p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+<input
+type="text"
+id="search"
+placeholder="🔍 Search semester, subject or unit..."
+onkeyup="searchContent()"
+>
+
+</div>
+
+
+<!-- =====================================================
+SEMESTER 1
+===================================================== -->
+
+<div class="semester">
+
+<div class="semester-title" onclick="toggleSemester(this)">
+
+<span>Semester 1</span>
+
+<span class="arrow">▼</span>
+
+</div>
+
+
+<div class="subject-container">
+
+
+<!-- PROGRAMMING C -->
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+
+<span>1. Programming in C</span>
+
+<span class="subject-arrow">▼</span>
+
+</div>
+
+<div class="units">
+
+<div class="unit">
+<a href="content/sem1/programming-in-c-unit1.html">
+<span class="unit-number">Unit 1:</span> Introduction to C Programming
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/programming-in-c-unit2.html">
+<span class="unit-number">Unit 2:</span> Data Types and Operators
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/programming-in-c-unit3.html">
+<span class="unit-number">Unit 3:</span> Control Statements
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/programming-in-c-unit4.html">
+<span class="unit-number">Unit 4:</span> Functions, Arrays and Strings
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/programming-in-c-unit5.html">
+<span class="unit-number">Unit 5:</span> Pointers, Structures and Files
+</a>
+</div>
+
+</div>
+</div>
+
+
+<!-- DIGITAL LOGIC -->
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>2. Digital Logic and Switching Theory</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit">
+<a href="content/sem1/digital-logic-unit1.html">
+<span class="unit-number">Unit 1:</span> Number Systems and Codes
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/digital-logic-unit2.html">
+<span class="unit-number">Unit 2:</span> Boolean Algebra and Logic Gates
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/digital-logic-unit3.html">
+<span class="unit-number">Unit 3:</span> Combinational Circuits
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/digital-logic-unit4.html">
+<span class="unit-number">Unit 4:</span> Sequential Circuits
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/digital-logic-unit5.html">
+<span class="unit-number">Unit 5:</span> Registers and Counters
+</a>
+</div>
+
+</div>
+</div>
+
+
+<!-- MATHEMATICS I -->
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>3. Mathematics I</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit">
+<a href="content/sem1/mathematics-1-unit1.html">
+<span class="unit-number">Unit 1:</span> Differential Calculus
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/mathematics-1-unit2.html">
+<span class="unit-number">Unit 2:</span> Integral Calculus
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/mathematics-1-unit3.html">
+<span class="unit-number">Unit 3:</span> Matrices
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/mathematics-1-unit4.html">
+<span class="unit-number">Unit 4:</span> Differential Equations
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/mathematics-1-unit5.html">
+<span class="unit-number">Unit 5:</span> Applications
+</a>
+</div>
+
+</div>
+</div>
+
+
+<!-- FUNDAMENTALS -->
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>4. Fundamentals of Computer and Applications</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit">
+<a href="content/sem1/fundamentals-computer-unit1.html">
+<span class="unit-number">Unit 1:</span> Introduction to Computers
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/fundamentals-computer-unit2.html">
+<span class="unit-number">Unit 2:</span> Computer Hardware
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/fundamentals-computer-unit3.html">
+<span class="unit-number">Unit 3:</span> Computer Software
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/fundamentals-computer-unit4.html">
+<span class="unit-number">Unit 4:</span> Operating Systems
+</a>
+</div>
+
+<div class="unit">
+<a href="content/sem1/fundamentals-computer-unit5.html">
+<span class="unit-number">Unit 5:</span> Internet and Applications
+</a>
+</div>
+
+</div>
+</div>
+
+
+<!-- MIL -->
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>5. MIL-I</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem1/mil-1-unit1.html"><span class="unit-number">Unit 1:</span> Unit 1</a></div>
+<div class="unit"><a href="content/sem1/mil-1-unit2.html"><span class="unit-number">Unit 2:</span> Unit 2</a></div>
+<div class="unit"><a href="content/sem1/mil-1-unit3.html"><span class="unit-number">Unit 3:</span> Unit 3</a></div>
+<div class="unit"><a href="content/sem1/mil-1-unit4.html"><span class="unit-number">Unit 4:</span> Unit 4</a></div>
+<div class="unit"><a href="content/sem1/mil-1-unit5.html"><span class="unit-number">Unit 5:</span> Unit 5</a></div>
+
+</div>
+</div>
+
+
+<!-- LAB C -->
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>6. Lab on Programming in C</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem1/lab-c-unit1.html"><span class="unit-number">Unit 1:</span> C Basics</a></div>
+<div class="unit"><a href="content/sem1/lab-c-unit2.html"><span class="unit-number">Unit 2:</span> Control Statements</a></div>
+<div class="unit"><a href="content/sem1/lab-c-unit3.html"><span class="unit-number">Unit 3:</span> Arrays and Strings</a></div>
+<div class="unit"><a href="content/sem1/lab-c-unit4.html"><span class="unit-number">Unit 4:</span> Functions and Pointers</a></div>
+<div class="unit"><a href="content/sem1/lab-c-unit5.html"><span class="unit-number">Unit 5:</span> Structures and Files</a></div>
+
+</div>
+</div>
+
+
+<!-- LAB DIGITAL -->
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>7. Lab on Digital Logic and Switching Theory</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem1/lab-digital-unit1.html"><span class="unit-number">Unit 1:</span> Logic Gates</a></div>
+<div class="unit"><a href="content/sem1/lab-digital-unit2.html"><span class="unit-number">Unit 2:</span> Boolean Algebra</a></div>
+<div class="unit"><a href="content/sem1/lab-digital-unit3.html"><span class="unit-number">Unit 3:</span> Combinational Circuits</a></div>
+<div class="unit"><a href="content/sem1/lab-digital-unit4.html"><span class="unit-number">Unit 4:</span> Sequential Circuits</a></div>
+<div class="unit"><a href="content/sem1/lab-digital-unit5.html"><span class="unit-number">Unit 5:</span> Experiments</a></div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+SEMESTER 2
+===================================================== -->
+
+<div class="semester">
+
+<div class="semester-title" onclick="toggleSemester(this)">
+<span>Semester 2</span>
+<span class="arrow">▼</span>
+</div>
+
+
+<div class="subject-container">
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>1. Python Programming</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem2/python-unit1.html"><span class="unit-number">Unit 1:</span> Python Basics</a></div>
+<div class="unit"><a href="content/sem2/python-unit2.html"><span class="unit-number">Unit 2:</span> Data Types and Operators</a></div>
+<div class="unit"><a href="content/sem2/python-unit3.html"><span class="unit-number">Unit 3:</span> Control Statements</a></div>
+<div class="unit"><a href="content/sem2/python-unit4.html"><span class="unit-number">Unit 4:</span> Functions and Modules</a></div>
+<div class="unit"><a href="content/sem2/python-unit5.html"><span class="unit-number">Unit 5:</span> Files and Exceptions</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>2. Numerical Method</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem2/numerical-method-unit1.html"><span class="unit-number">Unit 1:</span> Errors</a></div>
+<div class="unit"><a href="content/sem2/numerical-method-unit2.html"><span class="unit-number">Unit 2:</span> Roots of Equations</a></div>
+<div class="unit"><a href="content/sem2/numerical-method-unit3.html"><span class="unit-number">Unit 3:</span> Interpolation</a></div>
+<div class="unit"><a href="content/sem2/numerical-method-unit4.html"><span class="unit-number">Unit 4:</span> Numerical Integration</a></div>
+<div class="unit"><a href="content/sem2/numerical-method-unit5.html"><span class="unit-number">Unit 5:</span> Differential Equations</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>3. Mathematics II</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem2/mathematics-2-unit1.html"><span class="unit-number">Unit 1:</span> Algebra</a></div>
+<div class="unit"><a href="content/sem2/mathematics-2-unit2.html"><span class="unit-number">Unit 2:</span> Calculus</a></div>
+<div class="unit"><a href="content/sem2/mathematics-2-unit3.html"><span class="unit-number">Unit 3:</span> Vector Analysis</a></div>
+<div class="unit"><a href="content/sem2/mathematics-2-unit4.html"><span class="unit-number">Unit 4:</span> Probability</a></div>
+<div class="unit"><a href="content/sem2/mathematics-2-unit5.html"><span class="unit-number">Unit 5:</span> Applications</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>4. Introduction to Internet Technology</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem2/internet-technology-unit1.html"><span class="unit-number">Unit 1:</span> Internet Fundamentals</a></div>
+<div class="unit"><a href="content/sem2/internet-technology-unit2.html"><span class="unit-number">Unit 2:</span> Web Technologies</a></div>
+<div class="unit"><a href="content/sem2/internet-technology-unit3.html"><span class="unit-number">Unit 3:</span> HTML and CSS</a></div>
+<div class="unit"><a href="content/sem2/internet-technology-unit4.html"><span class="unit-number">Unit 4:</span> JavaScript</a></div>
+<div class="unit"><a href="content/sem2/internet-technology-unit5.html"><span class="unit-number">Unit 5:</span> Internet Security</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>5. English I</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem2/english-1-unit1.html"><span class="unit-number">Unit 1:</span> Unit 1</a></div>
+<div class="unit"><a href="content/sem2/english-1-unit2.html"><span class="unit-number">Unit 2:</span> Unit 2</a></div>
+<div class="unit"><a href="content/sem2/english-1-unit3.html"><span class="unit-number">Unit 3:</span> Unit 3</a></div>
+<div class="unit"><a href="content/sem2/english-1-unit4.html"><span class="unit-number">Unit 4:</span> Unit 4</a></div>
+<div class="unit"><a href="content/sem2/english-1-unit5.html"><span class="unit-number">Unit 5:</span> Unit 5</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>6. Lab on Python Programming</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem2/lab-python-unit1.html"><span class="unit-number">Unit 1:</span> Python Basics</a></div>
+<div class="unit"><a href="content/sem2/lab-python-unit2.html"><span class="unit-number">Unit 2:</span> Control Statements</a></div>
+<div class="unit"><a href="content/sem2/lab-python-unit3.html"><span class="unit-number">Unit 3:</span> Functions</a></div>
+<div class="unit"><a href="content/sem2/lab-python-unit4.html"><span class="unit-number">Unit 4:</span> Data Structures</a></div>
+<div class="unit"><a href="content/sem2/lab-python-unit5.html"><span class="unit-number">Unit 5:</span> File Handling</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>7. Lab on Numerical Method</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem2/lab-numerical-unit1.html"><span class="unit-number">Unit 1:</span> Errors</a></div>
+<div class="unit"><a href="content/sem2/lab-numerical-unit2.html"><span class="unit-number">Unit 2:</span> Equations</a></div>
+<div class="unit"><a href="content/sem2/lab-numerical-unit3.html"><span class="unit-number">Unit 3:</span> Interpolation</a></div>
+<div class="unit"><a href="content/sem2/lab-numerical-unit4.html"><span class="unit-number">Unit 4:</span> Integration</a></div>
+<div class="unit"><a href="content/sem2/lab-numerical-unit5.html"><span class="unit-number">Unit 5:</span> Differential Equations</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>8. Environmental Studies (EVS)</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem2/evs-unit1.html"><span class="unit-number">Unit 1:</span> Environment</a></div>
+<div class="unit"><a href="content/sem2/evs-unit2.html"><span class="unit-number">Unit 2:</span> Natural Resources</a></div>
+<div class="unit"><a href="content/sem2/evs-unit3.html"><span class="unit-number">Unit 3:</span> Biodiversity</a></div>
+<div class="unit"><a href="content/sem2/evs-unit4.html"><span class="unit-number">Unit 4:</span> Pollution</a></div>
+<div class="unit"><a href="content/sem2/evs-unit5.html"><span class="unit-number">Unit 5:</span> Environmental Protection</a></div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+SEMESTER 3
+===================================================== -->
+
+<div class="semester">
+
+<div class="semester-title" onclick="toggleSemester(this)">
+<span>Semester 3</span>
+<span class="arrow">▼</span>
+</div>
+
+<div class="subject-container">
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>1. Data Structure</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem3/data-structure-unit1.html"><span class="unit-number">Unit 1:</span> Arrays and Linked Lists</a></div>
+<div class="unit"><a href="content/sem3/data-structure-unit2.html"><span class="unit-number">Unit 2:</span> Stack and Queue</a></div>
+<div class="unit"><a href="content/sem3/data-structure-unit3.html"><span class="unit-number">Unit 3:</span> Trees and AVL Trees</a></div>
+<div class="unit"><a href="content/sem3/data-structure-unit4.html"><span class="unit-number">Unit 4:</span> Graphs</a></div>
+<div class="unit"><a href="content/sem3/data-structure-unit5.html"><span class="unit-number">Unit 5:</span> Sorting, Searching and Hashing</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>2. Computer Architecture</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem3/computer-architecture-unit1.html"><span class="unit-number">Unit 1:</span> Basic Computer Organization</a></div>
+<div class="unit"><a href="content/sem3/computer-architecture-unit2.html"><span class="unit-number">Unit 2:</span> CPU Organization</a></div>
+<div class="unit"><a href="content/sem3/computer-architecture-unit3.html"><span class="unit-number">Unit 3:</span> Stack Organization</a></div>
+<div class="unit"><a href="content/sem3/computer-architecture-unit4.html"><span class="unit-number">Unit 4:</span> Memory Organization</a></div>
+<div class="unit"><a href="content/sem3/computer-architecture-unit5.html"><span class="unit-number">Unit 5:</span> Input/Output Organization</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>3. Introduction to Probability and Statistics</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem3/probability-statistics-unit1.html"><span class="unit-number">Unit 1:</span> Probability</a></div>
+<div class="unit"><a href="content/sem3/probability-statistics-unit2.html"><span class="unit-number">Unit 2:</span> Random Variables</a></div>
+<div class="unit"><a href="content/sem3/probability-statistics-unit3.html"><span class="unit-number">Unit 3:</span> Probability Distributions</a></div>
+<div class="unit"><a href="content/sem3/probability-statistics-unit4.html"><span class="unit-number">Unit 4:</span> Statistics</a></div>
+<div class="unit"><a href="content/sem3/probability-statistics-unit5.html"><span class="unit-number">Unit 5:</span> Correlation and Regression</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>4. MIL-II</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem3/mil-2-unit1.html"><span class="unit-number">Unit 1:</span> Unit 1</a></div>
+<div class="unit"><a href="content/sem3/mil-2-unit2.html"><span class="unit-number">Unit 2:</span> Unit 2</a></div>
+<div class="unit"><a href="content/sem3/mil-2-unit3.html"><span class="unit-number">Unit 3:</span> Unit 3</a></div>
+<div class="unit"><a href="content/sem3/mil-2-unit4.html"><span class="unit-number">Unit 4:</span> Unit 4</a></div>
+<div class="unit"><a href="content/sem3/mil-2-unit5.html"><span class="unit-number">Unit 5:</span> Unit 5</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>5. Lab on Data Structure</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem3/lab-data-structure-unit1.html"><span class="unit-number">Unit 1:</span> Arrays</a></div>
+<div class="unit"><a href="content/sem3/lab-data-structure-unit2.html"><span class="unit-number">Unit 2:</span> Linked Lists</a></div>
+<div class="unit"><a href="content/sem3/lab-data-structure-unit3.html"><span class="unit-number">Unit 3:</span> Stack and Queue</a></div>
+<div class="unit"><a href="content/sem3/lab-data-structure-unit4.html"><span class="unit-number">Unit 4:</span> Trees</a></div>
+<div class="unit"><a href="content/sem3/lab-data-structure-unit5.html"><span class="unit-number">Unit 5:</span> Searching and Sorting</a></div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+SEMESTER 4
+===================================================== -->
+
+<div class="semester">
+
+<div class="semester-title" onclick="toggleSemester(this)">
+<span>Semester 4</span>
+<span class="arrow">▼</span>
+</div>
+
+<div class="subject-container">
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>1. Database Management System</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem4/dbms-unit1.html"><span class="unit-number">Unit 1:</span> Introduction to DBMS</a></div>
+<div class="unit"><a href="content/sem4/dbms-unit2.html"><span class="unit-number">Unit 2:</span> ER and Relational Model</a></div>
+<div class="unit"><a href="content/sem4/dbms-unit3.html"><span class="unit-number">Unit 3:</span> SQL and Relational Algebra</a></div>
+<div class="unit"><a href="content/sem4/dbms-unit4.html"><span class="unit-number">Unit 4:</span> Normalization</a></div>
+<div class="unit"><a href="content/sem4/dbms-unit5.html"><span class="unit-number">Unit 5:</span> Query Processing and Transactions</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>2. Microprocessor</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem4/microprocessor-unit1.html"><span class="unit-number">Unit 1:</span> 8086 Architecture</a></div>
+<div class="unit"><a href="content/sem4/microprocessor-unit2.html"><span class="unit-number">Unit 2:</span> Instruction Set</a></div>
+<div class="unit"><a href="content/sem4/microprocessor-unit3.html"><span class="unit-number">Unit 3:</span> Addressing Modes</a></div>
+<div class="unit"><a href="content/sem4/microprocessor-unit4.html"><span class="unit-number">Unit 4:</span> Interrupts and Interfacing</a></div>
+<div class="unit"><a href="content/sem4/microprocessor-unit5.html"><span class="unit-number">Unit 5:</span> Peripheral Devices</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>3. Discrete Mathematics</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem4/discrete-mathematics-unit1.html"><span class="unit-number">Unit 1:</span> Sets and Relations</a></div>
+<div class="unit"><a href="content/sem4/discrete-mathematics-unit2.html"><span class="unit-number">Unit 2:</span> Logic and Propositions</a></div>
+<div class="unit"><a href="content/sem4/discrete-mathematics-unit3.html"><span class="unit-number">Unit 3:</span> Graph Theory</a></div>
+<div class="unit"><a href="content/sem4/discrete-mathematics-unit4.html"><span class="unit-number">Unit 4:</span> Combinatorics</a></div>
+<div class="unit"><a href="content/sem4/discrete-mathematics-unit5.html"><span class="unit-number">Unit 5:</span> Algebraic Structures</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>4. Lab on Database Management System</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem4/lab-dbms-unit1.html"><span class="unit-number">Unit 1:</span> SQL Basics</a></div>
+<div class="unit"><a href="content/sem4/lab-dbms-unit2.html"><span class="unit-number">Unit 2:</span> DDL and DML</a></div>
+<div class="unit"><a href="content/sem4/lab-dbms-unit3.html"><span class="unit-number">Unit 3:</span> Queries and Joins</a></div>
+<div class="unit"><a href="content/sem4/lab-dbms-unit4.html"><span class="unit-number">Unit 4:</span> Views and Triggers</a></div>
+<div class="unit"><a href="content/sem4/lab-dbms-unit5.html"><span class="unit-number">Unit 5:</span> Procedures and Projects</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>5. Lab on Microprocessor</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem4/lab-microprocessor-unit1.html"><span class="unit-number">Unit 1:</span> 8086 Programming</a></div>
+<div class="unit"><a href="content/sem4/lab-microprocessor-unit2.html"><span class="unit-number">Unit 2:</span> Assembly Language</a></div>
+<div class="unit"><a href="content/sem4/lab-microprocessor-unit3.html"><span class="unit-number">Unit 3:</span> Interfacing</a></div>
+<div class="unit"><a href="content/sem4/lab-microprocessor-unit4.html"><span class="unit-number">Unit 4:</span> Interrupts</a></div>
+<div class="unit"><a href="content/sem4/lab-microprocessor-unit5.html"><span class="unit-number">Unit 5:</span> Peripheral Interfacing</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>6. Data Communication and Computer Network</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem4/network-unit1.html"><span class="unit-number">Unit 1:</span> Data Communication</a></div>
+<div class="unit"><a href="content/sem4/network-unit2.html"><span class="unit-number">Unit 2:</span> OSI and TCP/IP</a></div>
+<div class="unit"><a href="content/sem4/network-unit3.html"><span class="unit-number">Unit 3:</span> Transmission and Multiplexing</a></div>
+<div class="unit"><a href="content/sem4/network-unit4.html"><span class="unit-number">Unit 4:</span> Routing and Switching</a></div>
+<div class="unit"><a href="content/sem4/network-unit5.html"><span class="unit-number">Unit 5:</span> Network Security</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>7. English II</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem4/english-2-unit1.html"><span class="unit-number">Unit 1:</span> Unit 1</a></div>
+<div class="unit"><a href="content/sem4/english-2-unit2.html"><span class="unit-number">Unit 2:</span> Unit 2</a></div>
+<div class="unit"><a href="content/sem4/english-2-unit3.html"><span class="unit-number">Unit 3:</span> Unit 3</a></div>
+<div class="unit"><a href="content/sem4/english-2-unit4.html"><span class="unit-number">Unit 4:</span> Unit 4</a></div>
+<div class="unit"><a href="content/sem4/english-2-unit5.html"><span class="unit-number">Unit 5:</span> Unit 5</a></div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+SEMESTER 5
+===================================================== -->
+
+<div class="semester">
+
+<div class="semester-title" onclick="toggleSemester(this)">
+<span>Semester 5</span>
+<span class="arrow">▼</span>
+</div>
+
+<div class="subject-container">
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>1. Operating System</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem5/operating-system-unit1.html"><span class="unit-number">Unit 1:</span> Introduction to OS</a></div>
+<div class="unit"><a href="content/sem5/operating-system-unit2.html"><span class="unit-number">Unit 2:</span> Process Management</a></div>
+<div class="unit"><a href="content/sem5/operating-system-unit3.html"><span class="unit-number">Unit 3:</span> Memory Management</a></div>
+<div class="unit"><a href="content/sem5/operating-system-unit4.html"><span class="unit-number">Unit 4:</span> File Management</a></div>
+<div class="unit"><a href="content/sem5/operating-system-unit5.html"><span class="unit-number">Unit 5:</span> Protection and Security</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>2. System Software</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem5/system-software-unit1.html"><span class="unit-number">Unit 1:</span> Assemblers</a></div>
+<div class="unit"><a href="content/sem5/system-software-unit2.html"><span class="unit-number">Unit 2:</span> Loaders and Linkers</a></div>
+<div class="unit"><a href="content/sem5/system-software-unit3.html"><span class="unit-number">Unit 3:</span> Macro Processors</a></div>
+<div class="unit"><a href="content/sem5/system-software-unit4.html"><span class="unit-number">Unit 4:</span> Compilers</a></div>
+<div class="unit"><a href="content/sem5/system-software-unit5.html"><span class="unit-number">Unit 5:</span> System Software</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>3. Computer Graphics</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem5/computer-graphics-unit1.html"><span class="unit-number">Unit 1:</span> Introduction and Scan Conversion</a></div>
+<div class="unit"><a href="content/sem5/computer-graphics-unit2.html"><span class="unit-number">Unit 2:</span> Line and Circle Algorithms</a></div>
+<div class="unit"><a href="content/sem5/computer-graphics-unit3.html"><span class="unit-number">Unit 3:</span> Polygon Filling</a></div>
+<div class="unit"><a href="content/sem5/computer-graphics-unit4.html"><span class="unit-number">Unit 4:</span> Transformations</a></div>
+<div class="unit"><a href="content/sem5/computer-graphics-unit5.html"><span class="unit-number">Unit 5:</span> Viewing and Rendering</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>4. Lab on Operating System</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem5/lab-os-unit1.html"><span class="unit-number">Unit 1:</span> Processes</a></div>
+<div class="unit"><a href="content/sem5/lab-os-unit2.html"><span class="unit-number">Unit 2:</span> CPU Scheduling</a></div>
+<div class="unit"><a href="content/sem5/lab-os-unit3.html"><span class="unit-number">Unit 3:</span> Memory Management</a></div>
+<div class="unit"><a href="content/sem5/lab-os-unit4.html"><span class="unit-number">Unit 4:</span> File Management</a></div>
+<div class="unit"><a href="content/sem5/lab-os-unit5.html"><span class="unit-number">Unit 5:</span> OS Experiments</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>5. Lab on Computer Graphics</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem5/lab-cg-unit1.html"><span class="unit-number">Unit 1:</span> DDA</a></div>
+<div class="unit"><a href="content/sem5/lab-cg-unit2.html"><span class="unit-number">Unit 2:</span> Bresenham</a></div>
+<div class="unit"><a href="content/sem5/lab-cg-unit3.html"><span class="unit-number">Unit 3:</span> Circle and Ellipse</a></div>
+<div class="unit"><a href="content/sem5/lab-cg-unit4.html"><span class="unit-number">Unit 4:</span> Polygon Filling</a></div>
+<div class="unit"><a href="content/sem5/lab-cg-unit5.html"><span class="unit-number">Unit 5:</span> Transformations</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>6. Artificial Intelligence</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem5/ai-unit1.html"><span class="unit-number">Unit 1:</span> Introduction to AI</a></div>
+<div class="unit"><a href="content/sem5/ai-unit2.html"><span class="unit-number">Unit 2:</span> Search Techniques</a></div>
+<div class="unit"><a href="content/sem5/ai-unit3.html"><span class="unit-number">Unit 3:</span> Knowledge Representation</a></div>
+<div class="unit"><a href="content/sem5/ai-unit4.html"><span class="unit-number">Unit 4:</span> Machine Learning</a></div>
+<div class="unit"><a href="content/sem5/ai-unit5.html"><span class="unit-number">Unit 5:</span> Applications</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>7. Community Engagement</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem5/community-unit1.html"><span class="unit-number">Unit 1:</span> Community and Society</a></div>
+<div class="unit"><a href="content/sem5/community-unit2.html"><span class="unit-number">Unit 2:</span> Community Problems</a></div>
+<div class="unit"><a href="content/sem5/community-unit3.html"><span class="unit-number">Unit 3:</span> Community Participation</a></div>
+<div class="unit"><a href="content/sem5/community-unit4.html"><span class="unit-number">Unit 4:</span> Field Work</a></div>
+<div class="unit"><a href="content/sem5/community-unit5.html"><span class="unit-number">Unit 5:</span> Community Development</a></div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+SEMESTER 6
+===================================================== -->
+
+<div class="semester">
+
+<div class="semester-title" onclick="toggleSemester(this)">
+<span>Semester 6</span>
+<span class="arrow">▼</span>
+</div>
+
+<div class="subject-container">
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>1. Object Oriented Programming with C++</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem6/cpp-unit1.html"><span class="unit-number">Unit 1:</span> Introduction to C++ and OOP</a></div>
+<div class="unit"><a href="content/sem6/cpp-unit2.html"><span class="unit-number">Unit 2:</span> Classes and Objects</a></div>
+<div class="unit"><a href="content/sem6/cpp-unit3.html"><span class="unit-number">Unit 3:</span> Inheritance and Polymorphism</a></div>
+<div class="unit"><a href="content/sem6/cpp-unit4.html"><span class="unit-number">Unit 4:</span> Templates and Exceptions</a></div>
+<div class="unit"><a href="content/sem6/cpp-unit5.html"><span class="unit-number">Unit 5:</span> File Handling and STL</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>2. Programming in JAVA</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem6/java-unit1.html"><span class="unit-number">Unit 1:</span> Java Fundamentals</a></div>
+<div class="unit"><a href="content/sem6/java-unit2.html"><span class="unit-number">Unit 2:</span> Classes and Objects</a></div>
+<div class="unit"><a href="content/sem6/java-unit3.html"><span class="unit-number">Unit 3:</span> Inheritance and Interfaces</a></div>
+<div class="unit"><a href="content/sem6/java-unit4.html"><span class="unit-number">Unit 4:</span> Exceptions and Threads</a></div>
+<div class="unit"><a href="content/sem6/java-unit5.html"><span class="unit-number">Unit 5:</span> JDBC and GUI</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>3. Wireless and Mobile Computing</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem6/wireless-mobile-unit1.html"><span class="unit-number">Unit 1:</span> Wireless Communication</a></div>
+<div class="unit"><a href="content/sem6/wireless-mobile-unit2.html"><span class="unit-number">Unit 2:</span> Mobile Networks</a></div>
+<div class="unit"><a href="content/sem6/wireless-mobile-unit3.html"><span class="unit-number">Unit 3:</span> Cellular Systems</a></div>
+<div class="unit"><a href="content/sem6/wireless-mobile-unit4.html"><span class="unit-number">Unit 4:</span> Mobile IP and Protocols</a></div>
+<div class="unit"><a href="content/sem6/wireless-mobile-unit5.html"><span class="unit-number">Unit 5:</span> Applications</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>4. System Analysis and Design</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem6/system-analysis-unit1.html"><span class="unit-number">Unit 1:</span> Introduction</a></div>
+<div class="unit"><a href="content/sem6/system-analysis-unit2.html"><span class="unit-number">Unit 2:</span> SDLC</a></div>
+<div class="unit"><a href="content/sem6/system-analysis-unit3.html"><span class="unit-number">Unit 3:</span> Requirement Analysis</a></div>
+<div class="unit"><a href="content/sem6/system-analysis-unit4.html"><span class="unit-number">Unit 4:</span> System Design</a></div>
+<div class="unit"><a href="content/sem6/system-analysis-unit5.html"><span class="unit-number">Unit 5:</span> Implementation</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>5. Lab on Object Oriented Programming with C++</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem6/lab-cpp-unit1.html"><span class="unit-number">Unit 1:</span> C++ Basics</a></div>
+<div class="unit"><a href="content/sem6/lab-cpp-unit2.html"><span class="unit-number">Unit 2:</span> Classes and Objects</a></div>
+<div class="unit"><a href="content/sem6/lab-cpp-unit3.html"><span class="unit-number">Unit 3:</span> Inheritance</a></div>
+<div class="unit"><a href="content/sem6/lab-cpp-unit4.html"><span class="unit-number">Unit 4:</span> Polymorphism</a></div>
+<div class="unit"><a href="content/sem6/lab-cpp-unit5.html"><span class="unit-number">Unit 5:</span> File Handling</a></div>
+
+</div>
+</div>
+
+
+<div class="subject">
+
+<div class="subject-title" onclick="toggleSubject(this)">
+<span>6. Lab on Programming in JAVA</span>
+<span class="subject-arrow">▼</span>
+</div>
+
+<div class="units">
+
+<div class="unit"><a href="content/sem6/lab-java-unit1.html"><span class="unit-number">Unit 1:</span> Java Basics</a></div>
+<div class="unit"><a href="content/sem6/lab-java-unit2.html"><span class="unit-number">Unit 2:</span> Classes and Objects</a></div>
+<div class="unit"><a href="content/sem6/lab-java-unit3.html"><span class="unit-number">Unit 3:</span> Inheritance</a></div>
+<div class="unit"><a href="content/sem6/lab-java-unit4.html"><span class="unit-number">Unit 4:</span> Exceptions and Threads</a></div>
+<div class="unit"><a href="content/sem6/lab-java-unit5.html"><span class="unit-number">Unit 5:</span> JDBC and GUI</a></div>
+
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+</div>
+
+
+<footer>
+
+<p>© 2026 Computer Science Study Portal</p>
+
+</footer>
+
+
+<script>
+
+/* SEMESTER OPEN/CLOSE */
+
+function toggleSemester(element){
+
+    const semester = element.parentElement;
+
+    semester.classList.toggle("open");
+
+}
+
+
+/* SUBJECT OPEN/CLOSE */
+
+function toggleSubject(element){
+
+    const subject = element.parentElement;
+
+    subject.classList.toggle("open");
+
+}
+
+
+/* SEARCH */
+
+function searchContent(){
+
+    const search =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const semesters =
+        document.querySelectorAll(".semester");
+
+    semesters.forEach(function(semester){
+
+        let semesterMatch =
+            semester.innerText
+            .toLowerCase()
+            .includes(search);
+
+        let subjectMatch = false;
+
+        const subjects =
+            semester.querySelectorAll(".subject");
+
+        subjects.forEach(function(subject){
+
+            const text =
+                subject.innerText.toLowerCase();
+
+            if(text.includes(search)){
+
+                subject.style.display = "block";
+
+                subjectMatch = true;
+
+            }
+            else{
+
+                subject.style.display = "none";
+
+            }
+
+        });
+
+
+        if(search === ""){
+
+            semester.style.display = "block";
+
+            subjects.forEach(function(subject){
+
+                subject.style.display = "block";
+
+            });
+
+        }
+        else if(semesterMatch || subjectMatch){
+
+            semester.style.display = "block";
+
+            semester.classList.add("open");
+
+        }
+        else{
+
+            semester.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+
+</body>
+</html>
