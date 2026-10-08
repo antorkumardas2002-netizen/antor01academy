@@ -184,6 +184,67 @@ header p{
     font-weight:bold;
 }
 
+
+/* ARTIFICIAL INTELLIGENCE - WEEK / LECTURE */
+
+.unit-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 15px;
+    background:#f1f5f9;
+    border-left:4px solid #2563eb;
+    border-radius:5px;
+    color:#334155;
+    font-weight:bold;
+    cursor:pointer;
+    user-select:none;
+    transition:.2s;
+}
+
+.unit-title:hover{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.unit-arrow{
+    transition:.3s;
+}
+
+.unit.active .unit-arrow{
+    transform:rotate(180deg);
+}
+
+.lectures{
+    display:none;
+    padding:6px 0 6px 15px;
+}
+
+.unit.active .lectures{
+    display:block;
+}
+
+.lecture{
+    margin:6px 0;
+}
+
+.lecture a{
+    display:block;
+    padding:10px 15px;
+    background:#f8fafc;
+    border-left:3px solid #93c5fd;
+    border-radius:5px;
+    text-decoration:none;
+    color:#475569;
+    transition:.2s;
+}
+
+.lecture a:hover{
+    background:#dbeafe;
+    color:#1d4ed8;
+    transform:translateX(4px);
+}
+
 /* FOOTER */
 
 footer{
@@ -1056,7 +1117,7 @@ SEMESTER 5
 </div>
 
 
-<div class="subject">
+<div class="subject ai-subject">
 
     <div class="subject-title" onclick="toggleSubject(this)">
         <span>6. Artificial Intelligence</span>
@@ -1542,6 +1603,17 @@ function toggleSubject(element){
 }
 
 
+/* AI WEEK OPEN/CLOSE */
+
+function toggleUnit(element){
+
+    const unit = element.parentElement;
+
+    unit.classList.toggle("active");
+
+}
+
+
 /* SEARCH */
 
 function searchContent(){
@@ -1549,65 +1621,191 @@ function searchContent(){
     const search =
         document.getElementById("search")
         .value
+        .trim()
         .toLowerCase();
 
     const semesters =
         document.querySelectorAll(".semester");
 
+    /* RESET WHEN SEARCH BOX IS EMPTY */
+
+    if(search === ""){
+
+        semesters.forEach(function(semester){
+
+            semester.style.display = "block";
+            semester.classList.remove("open");
+
+            const subjects =
+                semester.querySelectorAll(".subject");
+
+            subjects.forEach(function(subject){
+
+                subject.style.display = "block";
+                subject.classList.remove("open");
+
+                /* Reset AI weeks */
+
+                if(subject.classList.contains("ai-subject")){
+
+                    const units =
+                        subject.querySelectorAll(".unit");
+
+                    units.forEach(function(unit){
+
+                        unit.style.display = "block";
+                        unit.classList.remove("active");
+
+                    });
+
+                }
+
+            });
+
+        });
+
+        return;
+
+    }
+
+
+    /* SEARCH ALL SEMESTERS */
+
     semesters.forEach(function(semester){
 
-        let semesterMatch =
-            semester.innerText
-            .toLowerCase()
-            .includes(search);
+        const semesterTitle =
+            semester.querySelector(".semester-title");
 
-        let subjectMatch = false;
+        const semesterMatch =
+            semesterTitle
+            ? semesterTitle.innerText
+                .toLowerCase()
+                .includes(search)
+            : false;
+
+        let anySubjectMatch = false;
+
 
         const subjects =
             semester.querySelectorAll(".subject");
 
+
         subjects.forEach(function(subject){
 
-            const text =
-                subject.innerText.toLowerCase();
+            const subjectTitle =
+                subject.querySelector(".subject-title");
 
-            if(text.includes(search)){
+            const subjectTitleText =
+                subjectTitle
+                ? subjectTitle.innerText.toLowerCase()
+                : "";
 
-                subject.style.display = "block";
+            const subjectMatch =
+                subjectTitleText.includes(search);
 
-                subjectMatch = true;
+
+            /* SPECIAL SEARCH FOR ARTIFICIAL INTELLIGENCE */
+
+            if(subject.classList.contains("ai-subject")){
+
+                const units =
+                    subject.querySelectorAll(".unit");
+
+                let weekOrLectureMatch = false;
+
+
+                units.forEach(function(unit){
+
+                    const unitText =
+                        unit.innerText.toLowerCase();
+
+                    const unitMatch =
+                        unitText.includes(search);
+
+
+                    if(subjectMatch){
+
+                        /* If the AI subject itself matches,
+                           show every week. */
+
+                        unit.style.display = "block";
+                        unit.classList.remove("active");
+
+                    }
+                    else if(unitMatch){
+
+                        /* Show only matching week/lecture */
+
+                        unit.style.display = "block";
+                        unit.classList.add("active");
+
+                        weekOrLectureMatch = true;
+
+                    }
+                    else{
+
+                        unit.style.display = "none";
+                        unit.classList.remove("active");
+
+                    }
+
+                });
+
+
+                if(subjectMatch || weekOrLectureMatch){
+
+                    subject.style.display = "block";
+                    subject.classList.add("open");
+
+                    anySubjectMatch = true;
+
+                }
+                else{
+
+                    subject.style.display = "none";
+                    subject.classList.remove("open");
+
+                }
 
             }
+
+
+            /* NORMAL SUBJECT SEARCH */
+
             else{
 
-                subject.style.display = "none";
+                if(subjectMatch){
+
+                    subject.style.display = "block";
+                    subject.classList.add("open");
+
+                    anySubjectMatch = true;
+
+                }
+                else{
+
+                    subject.style.display = "none";
+                    subject.classList.remove("open");
+
+                }
 
             }
 
         });
 
 
-        if(search === ""){
+        /* SHOW THE SEMESTER IF ITS TITLE OR ANY SUBJECT MATCHES */
+
+        if(semesterMatch || anySubjectMatch){
 
             semester.style.display = "block";
-
-            subjects.forEach(function(subject){
-
-                subject.style.display = "block";
-
-            });
-
-        }
-        else if(semesterMatch || subjectMatch){
-
-            semester.style.display = "block";
-
             semester.classList.add("open");
 
         }
         else{
 
             semester.style.display = "none";
+            semester.classList.remove("open");
 
         }
 
